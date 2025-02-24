@@ -1,7 +1,8 @@
 import numpy as np
-import scipy as sp
+from scipy import interpolate
 
-def dvr(r, e, mu):
+
+def dvr(r, e, mu, interp=False):
     """
     Discrete Value Representation (DVR) 1-Dimensional
 
@@ -10,16 +11,23 @@ def dvr(r, e, mu):
         mu  : (float) reduce mass
     """
 
+    if interp:
+        cs = interpolate.CubicSpline(r, e)
+        r_new = np.linspace(r[0], r[-1], 500)
+        e_new = cs(r_new)
+
+        r = r_new
+        e = e_new
+
     N = len(r)
-    mp = (r[-1] - r[0]) / N
-    curve = sp.interp1d(r, e)
+    mp = (r[1] - r[0])
 
     H = np.ndarray((N,N), dtype="float")
 
     for i in range(N):
         for j in range(N):
             if(i == j):
-                H[i][j] = (1 / (2 * mu * mp**2)) * (np.pi**2 / 3) + curve(i * mp)
+                H[i][j] = (1 / (2 * mu * mp**2)) * (np.pi**2 / 3) + e[i]
 
             else:
                 H[i][j] = (-1)**(i - j) * (1 / (2 * mu * mp**2)) * (2/ (i-j)**2)
@@ -27,4 +35,4 @@ def dvr(r, e, mu):
     Ev, eigvec = np.linalg.eigh(H)
     Cv = eigvec.transpose()
     
-    return [Ev, Cv]
+    return [r, e, Cv, Ev]
