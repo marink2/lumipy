@@ -5,9 +5,9 @@ def dvr(r, e, mu):
     """
     Discrete Value Representation (DVR) 1-Dimensional
 
-        r  : (array) potential surface position values
-        e  : (array) potential surface energy values
-        mu : (float) reduce mass
+        r   : (array) potential surface position values
+        e   : (array) potential surface energy values
+        mu  : (float) reduce mass
     """
 
     N = len(r)
