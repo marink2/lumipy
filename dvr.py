@@ -6,9 +6,9 @@ def dvr(r, e, mu, interp=False):
     """
     Discrete Value Representation (DVR) 1-Dimensional
 
-        r   : (array) potential surface position values
-        e   : (array) potential surface energy values
-        mu  : (float) reduce mass
+        r   : (array) potential surface position values in a.u. (a0 - bohr)
+        e   : (array) potential surface energy values in a.u. (Eh - hartree)
+        mu  : (float) reduce mass in a.u. (me - mass of electron)
     """
 
     if interp:
