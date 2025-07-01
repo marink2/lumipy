@@ -1,8 +1,8 @@
 import numpy as np
 
-def kramers_heisenberg(e, e1, e2, f1, f2, k=0.0):
+def khd(e, e1, e2, f1, f2, k=0.0):
     """
-    Kramers-Heisenberg formula for inelastic scattering
+    Kramers-Heisenberg-Dirac formula for inelastic scattering
         e   : energy values, can be given as a number or array of numbers
         e1  : energy values of the first state
         e2  : energy values of the second state
